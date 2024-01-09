@@ -1,0 +1,4 @@
+
+
+
+void begin_application();

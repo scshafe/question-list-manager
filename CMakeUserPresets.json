@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/home/cole/git-projects/question-list/build/CMakePresets.json"
+    ]
+}
