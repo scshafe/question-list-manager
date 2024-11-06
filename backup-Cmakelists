@@ -1,0 +1,260 @@
+cmake_minimum_required(VERSION 3.15)
+
+set(CMAKE_SYSROOT "/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs")
+
+set(ENV{PKG_CONFIG_PATH} "")
+set(ENV{PKG_CONFIG_LIBDIR} "${CMAKE_SYSROOT}/usr/lib/pkgconfig:${CMAKE_SYSROOT}/usr/share/pkgconfig")
+set(ENV{PKG_CONFIG_SYSROOT_DIR} ${CMAKE_SYSROOT})
+
+set(CMAKE_TOOLCHAIN_FILE "BBBToolchain.cmake")
+
+project(question-manager CXX)
+
+# find_package(JSONCPP REQUIRED)
+
+# add_executable(DESKTOP-QUESTION-MANAGER src/view/desktop-app/main.cpp)
+# add_executable(EMBEDDED-QUESTION-MANAGER ...)
+
+
+
+
+
+
+# add_library(QUESTION-API src/model/question-api/question-manager.cpp src/model/question-api/question.cpp src/model/question-api/json-qm.cpp)
+# # target_link_libraries(${PROJECT_NAME} JsonCpp::JsonCpp)
+# find_package(jsoncpp REQUIRED)
+# target_link_libraries(QUESTION-API ${jsoncpp_LIBRARIES})
+# target_include_directories(QUESTION-API PUBLIC ${jsoncpp_INCLUDE_DIRS} src/model/question-api)
+
+
+# add_executable(DESKTOP-CONTROLLER src/controller/desktop-controller/main.cpp)
+# target_link_libraries(DESKTOP-CONTROLLER PUBLIC QUESTION-API)
+# target_include_directories(DESKTOP-CONTROLLER PUBLIC src/model/question-api)
+
+
+find_package(PkgConfig)
+
+pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
+
+add_executable(EMBEDDED-GUI src/view/embedded-app/opengtk-version/start-gui.cpp
+                            src/view/embedded-app/opengtk-version/main-window.cpp
+                            src/view/embedded-app/opengtk-version/question-card.cpp)
+
+link_directories(
+                                ${GTKMM_LIBRARY_DIRS}  )
+                            
+include_directories(
+                                ${GTKMM_INCLUDE_DIRS}  )
+
+target_link_libraries(EMBEDDED-GUI PUBLIC ${GTKMM_LIBRARIES}
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libthai.so.0
+
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libanl.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libatk-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libatk-bridge-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libatkmm-1.6.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libatspi.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libbfd-2.31.1-system.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libblkid.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libBrokenLocale.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcairo-gobject.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcairomm-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcairo-script-interpreter.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcairo.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcrypto.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcrypt.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libc.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libcurses.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdb-5.3.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdbus-1.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdl.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_amdgpu.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_etnaviv.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_exynos.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_freedreno.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_nouveau.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_omap.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_radeon.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdrm_tegra.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libdw-0.176.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libEGL.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libelf-0.176.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libepoxy.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libexpat.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libexpatw.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libffi.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libfontconfig.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libform.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libformw.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libfreetype.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libfribidi.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgdk-3.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgdkmm-3.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgdk_pixbuf-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgdk_pixbuf_xlib-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgio-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgiomm-2.4.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libGLdispatch.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libGLESv1_CM.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libGLESv2.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libglib-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libglibmm-2.4.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libglibmm_generate_extra_defs-2.4.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libGL.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libGLX.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgmodule-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgobject-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgraphite2.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgthread-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgtk-3.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libgtkmm-3.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libharfbuzz-gobject.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libharfbuzz-icu.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libharfbuzz.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libICE.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicudata.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicui18n.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicuio.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicutest.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicutu.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libicuuc.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libLLVM-8.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libmenu.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libmenuw.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libmount.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libm.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libncurses.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libncursesw.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnode.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnsl.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_compat.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_dns.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_files.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_hesiod.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_nisplus.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libnss_nis.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libopcodes-2.31.1-system.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libOpenGL.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpanel.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpanelw.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpango-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpangocairo-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpangoft2-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpangomm-1.4.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpangoxft-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpcre16.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpcre32.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpcrecpp.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpcreposix.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpcre.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpixman-1.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpng16.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpng.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpthread.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpython2.7.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libpython3.7m.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libresolv.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/librt.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libselinux.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libsepol.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libsigc-2.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libSM.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libssl.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libtermcap.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libthread_db.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libtic.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libtinfo.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libusb-1.0.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libutil.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libuuid.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libuv.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libv8_libbase.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libv8_libplatform.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libv8_libsampler.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libv8.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libwayland-client.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libwayland-cursor.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libwayland-egl.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libwayland-server.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libX11.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libX11-xcb.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXau.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-dri2.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-dri3.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-glx.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-present.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-randr.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-render.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-shape.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-shm.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-sync.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxcb-xfixes.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXcomposite.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXcursor.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXdamage.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXdmcp.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXext.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXfixes.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXft.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXinerama.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXi.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxkbcommon.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXrandr.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXrender.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libxshmfence.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXtst.so
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/libXxf86vm.so
+)
+
+target_include_directories(EMBEDDED-GUI PUBLIC ${GTKMM_INCLUDE_DIRS}
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/gtkmm-3.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/gtkmm-3.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/gdkmm-3.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/pangomm-1.4/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/glibmm-2.4/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/glibmm-2.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/glibmm-2.4/glibmm
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/glib-2.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/sigc++-2.0/sigc++
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/sigc++-2.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/sigc++-2.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/pangomm-1.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/cairomm-1.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/atkmm-1.6
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/gdkmm-3.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/giomm-2.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/giomm-2.4/include
+
+)
+
+target_link_directories(EMBEDDED-GUI PUBLIC ${GTKMM_LIBRARY_DIRS}
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/gtkmm-3.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/gtkmm-3.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/gdkmm-3.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/pangomm-1.4/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/glibmm-2.4/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/glibmm-2.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/glibmm-2.4/glibmm
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/glib-2.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/sigc++-2.0/sigc++
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/sigc++-2.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/sigc++-2.0/include
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/pangomm-1.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/cairomm-1.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/atkmm-1.6
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/gdkmm-3.0
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/include/giomm-2.4
+/home/cole/beaglebone/cross-compiler-toolchain/linaro-toolchain/rootfs/usr/lib/arm-linux-gnueabihf/giomm-2.4/include
+)
+
+
+
+
