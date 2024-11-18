@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
-project(question-manager CXX)
+
+include(CMakePrintHelpers)
+
+set(CMAKE_TOOLCHAIN_FILE "bbb-deb-11-hello.cmake")
+
+project(question-manager VERSION 1.0)
+# project(question-manager CXX)
 
 # find_package(JSONCPP REQUIRED)
 
@@ -31,12 +37,15 @@ add_executable(EMBEDDED-GUI src/view/embedded-app/opengtk-version/start-gui.cpp
                             src/view/embedded-app/opengtk-version/main-window.cpp
                             src/view/embedded-app/opengtk-version/question-card.cpp)
 
-link_directories(
-                                ${GTKMM_LIBRARY_DIRS}  )
-                            
-include_directories(
-                                ${GTKMM_INCLUDE_DIRS}  )
+
+target_include_directories(EMBEDDED-GUI PRIVATE ${GTKMM_INCLUDE_DIRS}  )
+
+# cmake_print_variables(GTKMM_LIBRARY_DIRS)
+target_link_directories(EMBEDDED-GUI PRIVATE ${GTKMM_LIBRARY_DIRS}  )
+
+
+# cmake_print_variables(GTKMM_INCLUDE_DIRS)
+
 
 target_link_libraries(EMBEDDED-GUI ${GTKMM_LIBRARIES})
 
-target_include_directories(EMBEDDED-GUI ${GTKMM_INCLUDE_DIRS})
