@@ -2,6 +2,9 @@
 #define MAIN_WINDOW_H
 
 #include <gtkmm/window.h>
+#include <gtkmm/box.h>
+
+#include "header.h"
 #include "question-card.h"
 
 
@@ -16,9 +19,12 @@ protected:
   //Signal handlers:
   void on_button_clicked();
 
+  //Container Widgets: (for holding member widgets)
+  Gtk::Box app_container;
+
   //Member widgets:
+  Header header;
   QuestionCard question_card;
-//   Gtk::Button m_button;
 };
 
 #endif
