@@ -11,6 +11,7 @@ Gtk::Button("default button")
     // add(m_button);
 
     // m_button.show();
+    signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_question_clicked));
 
 }
 
