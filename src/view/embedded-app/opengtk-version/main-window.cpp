@@ -10,7 +10,7 @@
 MainWindow::MainWindow()
 : app_container(Gtk::ORIENTATION_VERTICAL),
   header(),
-  question_card("yeet button")
+  question_card()
 // : m_button("Hello World")   // creates a new button with label "Hello World".
 {
   // Sets the border width of the window.
@@ -21,17 +21,23 @@ MainWindow::MainWindow()
 
   add(app_container);
 
-  app_container.add(header);
+  app_container.pack_start(header, Gtk::PACK_SHRINK);
+
+  header.set_vexpand(false);
+  header.set_valign(Gtk::ALIGN_BASELINE);
   // header.show();
 
   // When the button receives the "clicked" signal, it will call the
   // on_button_clicked() method defined below.
-  // question_card.signal_clicked().connect(sigc::mem_fun(*this,
-  //             &MainWindow::on_button_clicked));
+  // question_card.signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_button_clicked));
   // question_card.signal_clicked().connect(sigc::mem_fun(*this,
   //             &question_card.on_question_clicked)));
   // This packs the button into the Window (a container).
-  app_container.add(question_card);
+  
+  app_container.pack_start(question_card);
+
+  question_card.set_vexpand(true);
+  question_card.set_valign(Gtk::ALIGN_FILL);
   // add(question_card);
 
   // The final step is to display this newly created widget...

@@ -9,7 +9,9 @@ dependencies for building:
 
 - libgtkmm-3.0-dev
 - libgtk-3-dev
-- libgweather-3-dev (for retrieving weather information)
+<!-- - libgweather-3-dev (for retrieving weather information) -->
+- libjsoncpp-dev
+- libcurlpp-dev
 
 
 

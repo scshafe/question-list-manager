@@ -1,6 +1,3 @@
-
-#include "temp-widget.h"
-
 #include <sstream>
 #include <iostream>
 #include <string>
@@ -8,6 +5,10 @@
 // #include <libgweather/gweather.h>
 #include <curl/curl.h>
 #include <json/json.h>
+
+
+#include "temp-widget.h"
+#include "time-helper.h"
 
 TempWidget::TempWidget()
 {
@@ -71,6 +72,8 @@ void TempWidget::update_weather()
   }
 
   const auto rawJsonLength = static_cast<int>(rawJson.length());
+
+  std::cout << rawJson << std::endl;
   
   Json::Value root;
   JSONCPP_STRING err;
@@ -95,7 +98,7 @@ void TempWidget::update_weather()
 
 std::string TempWidget::create_weather_url(){
   std::stringstream ss;
-  ss << "https://" << getenv("BBB_WEATHER_USERNAME") << ":" << getenv("BBB_WEATHER_PASS") << "@api.meteomatics.com/2024-11-22T10:25:00.000Z/t_2m:F/41.8755616,-87.6244212/json?model=mix";
+  ss << "https://" << getenv("BBB_WEATHER_USERNAME") << ":" << getenv("BBB_WEATHER_PASS") << "@api.meteomatics.com/" << utc_time_for_weather_api() << "/t_2m:F/41.8755616,-87.6244212/json?model=mix";
   std::cout << ss.str() << std::endl;
   return ss.str();
 }
