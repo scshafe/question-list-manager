@@ -47,7 +47,8 @@ add_executable(EMBEDDED-GUI src/view/embedded-app/opengtk-version/start-gui.cpp
                             src/view/embedded-app/opengtk-version/question-card.cpp
                             src/view/embedded-app/opengtk-version/header.cpp
                             src/view/embedded-app/opengtk-version/time-widget.cpp
-                            src/view/embedded-app/opengtk-version/temp-widget.cpp)
+                            src/view/embedded-app/opengtk-version/temp-widget.cpp
+                            src/view/embedded-app/opengtk-version/time-helper.cpp)
 
 
 target_include_directories(EMBEDDED-GUI PRIVATE ${GTKMM_INCLUDE_DIRS} ${GWEATHER_INCLUDE_DIRS} ${LIBCURL_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS})
