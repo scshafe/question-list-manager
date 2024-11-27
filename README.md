@@ -24,3 +24,17 @@ If during development, you would like to start the gui via ssh or a serial conne
 ```
 allowed_users=anybody
 ```
+
+
+### Setting timezone
+
+You will need to set your local timezone:
+
+```
+# timedatectl set-timezone [your-timezone]
+```
+
+Timezones can be found by running:
+```
+$ timedatectl list-timezones
+```
