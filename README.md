@@ -38,3 +38,14 @@ Timezones can be found by running:
 ```
 $ timedatectl list-timezones
 ```
+ 
+### Setting the weather API username/word
+
+This part is only necessary if you would like to include live weather information (current temperature, daily high, daily low, and updated sunrise/sunset).
+
+You will need a username and password with meteomatics (free accounts for non-business purposes are available) in order to pull live weather information. On the BBB, export both of these as environment variables from the commandline:
+
+```
+$ export BBB_WEATHER_USERNAME=username
+$ export BBB_WEATHER_PASSWORD=password
+```
