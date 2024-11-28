@@ -2,7 +2,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/label.h>
 
-#include "header.h"
+#include "header-widget.h"
 
 Header::Header() :
 Gtk::Box(),

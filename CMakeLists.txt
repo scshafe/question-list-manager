@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.18)
 
 include(CMakePrintHelpers)
 
@@ -6,31 +6,52 @@ set(CMAKE_TOOLCHAIN_FILE "bbb-deb-11-hello.cmake")
 
 project(question-manager VERSION 1.0)
 
-set(GUI_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src/view/embedded-app/opengtk-version") # 
+# include(src/controller/CMakeLists.txt)
+# include(src/model/CMakeLists.txt)
+# include(src/view/CMakeLists.txt)
 
+# set(VIEW_SOURCES "${CMAKE_SOURCE_DIR}/src/view") # 
+# set(VIEW_HEADERS "${CMAKE_SOURCE_DIR}/src/view/include")
 
-cmake_print_variables(CMAKE_SOURCE_DIR)
-cmake_print_variables(GUI_SOURCE_DIR)
+# set(MODEL_SOURCES "${CMAKE_SOURCE_DIR}/src/model") # 
+# set(MODEL_HEADERS "${CMAKE_SOURCE_DIR}/src/model/include")
+
+# set(CONTROL_SOURCES "${CMAKE_SOURCE_DIR}/src/controller") # 
+# set(CONTROL_HEADERS "${CMAKE_SOURCE_DIR}/src/controller/include")
+
+# cmake_print_variables(CMAKE_SOURCE_DIR)
+# cmake_print_variables(VIEW_SOURCES)
 
 
 
 find_package(PkgConfig)
 
 pkg_check_modules(GTKMM gtkmm-3.0)
-
 pkg_check_modules(GWEATHER gweather-3.0)
-
 pkg_check_modules(LIBCURL libcurl)
-
 pkg_check_modules(JSONCPP jsoncpp)
 
-add_executable(EMBEDDED-GUI ${GUI_SOURCE_DIR}/start-gui.cpp
-                            ${GUI_SOURCE_DIR}/main-window.cpp
-                            ${GUI_SOURCE_DIR}/question-card.cpp
-                            ${GUI_SOURCE_DIR}/header.cpp
-                            ${GUI_SOURCE_DIR}/time-widget.cpp
-                            ${GUI_SOURCE_DIR}/temp-widget.cpp
-                            ${GUI_SOURCE_DIR}/time-helper.cpp)
+add_executable(EMBEDDED-GUI main.cpp)
+                            # ${VIEW_SOURCES}/main-window.cpp
+                            # ${VIEW_SOURCES}/question-card.cpp
+                            # ${VIEW_SOURCES}/header.cpp
+                            # ${VIEW_SOURCES}/time-widget.cpp
+                            # ${VIEW_SOURCES}/temp-widget.cpp
+                            # ${VIEW_SOURCES}/time-helper.cpp)
+
+# foreach(dir IN ITEMS src/controller src/view)
+#   add_subdirectory(${CMAKE_SOURCE_DIR}/${dir} ${dir}/)
+#   target_link_libraries(${PROJECT_NAME} ${dir}_lib)
+#   add_dependencies(${PROJECT_NAME} ${dir}_lib)
+# endforeach()
+
+add_subdirectory(src/controller)
+add_subdirectory(src/view)
+
+
+
+target_link_libraries(EMBEDDED-GUI controller)
+target_link_libraries(EMBEDDED-GUI view)
 
 
 target_include_directories(EMBEDDED-GUI PRIVATE ${GTKMM_INCLUDE_DIRS} ${GWEATHER_INCLUDE_DIRS} ${LIBCURL_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS})

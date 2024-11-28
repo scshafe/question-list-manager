@@ -4,7 +4,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/box.h>
 
-#include "header.h"
+#include "header-widget.h"
 #include "question-card.h"
 
 

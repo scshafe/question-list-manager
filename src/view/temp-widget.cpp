@@ -8,7 +8,8 @@
 
 
 #include "temp-widget.h"
-#include "time-helper.h"
+// #include "src/controller/time-helper.h"
+#include "../controller/time-helper.h"
 
 TempWidget::TempWidget()
 {
