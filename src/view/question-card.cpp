@@ -3,6 +3,7 @@
 #include <gtkmm/button.h>
 
 #include "question-card.h"
+#include "../controller/vocabulary-retriever.h"
 
 QuestionCard::QuestionCard() :
 Gtk::Bin(),
@@ -10,6 +11,9 @@ button()
 {
   word = "word";
   definition = "definition";
+
+  VocabularyRetriever* vr = VocabularyRetriever::get_instance();
+
 
   select_text = 0;
   button.set_label(get_text_item());
