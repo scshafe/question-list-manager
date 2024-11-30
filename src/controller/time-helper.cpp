@@ -22,9 +22,10 @@ std::string utc_time_for_display()
   int minute = localTime->tm_min;
   int second = localTime->tm_sec;
 
-  std::stringstream ss;
-  ss << hour << ":" << minute;
-  return ss.str();
+  char buf[5];
+  sprintf(buf, "%d:%02d", hour, minute);
+  std::string text_time(buf);
+  return text_time;
 }
 
 std::string utc_time_for_weather_api()
