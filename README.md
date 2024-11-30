@@ -25,6 +25,10 @@ If during development, you would like to start the gui via ssh or a serial conne
 allowed_users=anybody
 ```
 
+### Llama AI API key from Groq
+
+The application uses an AI model to generate example sentences for the words. In order to include this functionality, you will need to get an API key (free for several thousand queries per day) and include it in a file called `groq-llama-api-key`
+
 
 ### Setting timezone
 
