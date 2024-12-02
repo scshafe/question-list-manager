@@ -5,6 +5,8 @@
 #include <gtkmm/bin.h>
 #include <gtkmm/button.h>
 
+#include "../model/vocab-item.h"
+
 class QuestionCard : public Gtk::Bin
 {
 public:
@@ -17,8 +19,7 @@ public:
 
     int select_text;
 
-    std::string word;
-    std::string definition;
+    VocabItem vocab_item;
     // in the future add example sentence
 
 // protected:

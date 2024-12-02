@@ -3,17 +3,21 @@
 #include <gtkmm/button.h>
 
 #include "question-card.h"
-#include "../controller/vocabulary-retriever.h"
+#include "../controller/vocabulary-manager.h"
+#include "../model/vocab-item.h"
 
 QuestionCard::QuestionCard() :
 Gtk::Bin(),
 button()
 {
-  word = "word";
-  definition = "definition";
 
-  VocabularyRetriever* vr = VocabularyRetriever::get_instance();
+  // VocabularyRetriever* vr = VocabularyRetriever::get_instance();
 
+  VocabularyManager* vm = VocabularyManager::get_instance();
+
+  vocab_item = vm->get_next_vocab_item();
+
+  
 
   select_text = 0;
   button.set_label(get_text_item());
@@ -34,23 +38,22 @@ void QuestionCard::on_question_clicked()
 
 void QuestionCard::increment_text_counter()
 {
-  // change 2 to 3 when adding example sentences
-  select_text = ++select_text % 2;
+  select_text = ++select_text % 3;
 }
 
 std::string QuestionCard::get_text_item()
 {
   if (select_text == 0)
   {
-    return word;
+    return vocab_item.word;
   }
   if (select_text == 1)
   {
-    return definition;
+    return vocab_item.definition;
   }
-  // if (select_text == 2)
-  // {
-  //   return example_sentence;
-  // }
+  if (select_text == 2)
+  {
+    return vocab_item.example_sentence;
+  }
   return "Error in get_text_item()";
 }

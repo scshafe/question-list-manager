@@ -3,15 +3,7 @@
 
 #include <iostream>
 
-class VocabItem
-{
-public:
-  std::string word;
-  std::string definition;
-  // std::string example_sentence;
-};
-
-
+#include "vocab-item.h"
 
 class VocabularyRetriever
 {

@@ -45,12 +45,18 @@ add_executable(EMBEDDED-GUI main.cpp)
 #   add_dependencies(${PROJECT_NAME} ${dir}_lib)
 # endforeach()
 
+add_subdirectory(src/libs)
 add_subdirectory(src/controller)
+
+add_subdirectory(src/model)
 add_subdirectory(src/view)
 
 
 
+target_link_libraries(EMBEDDED-GUI libs)
 target_link_libraries(EMBEDDED-GUI controller)
+
+target_link_libraries(EMBEDDED-GUI model)
 target_link_libraries(EMBEDDED-GUI view)
 
 
