@@ -32,13 +32,3 @@ VocabularyRetriever* VocabularyRetriever::get_instance()
   std::cout << "accessing singleton VocabRetriever" << std::endl;
   return p_inst;
 }
-
-// VocabularyRetriever* VocabularyRetriever::getInstance()
-// {
-//   static VocabularyRetriever instance;
-
-//   std::cout << "accessing singleton VocabRetriever" << std::endl;
-
-//   return &instance;
-// }
-

@@ -7,6 +7,7 @@
 
 
 #include "groq-sentence-fetcher.h"
+#include "../libs/my-json-helper.h"
 
 GroqSentenceFetcher::GroqSentenceFetcher()
 {
@@ -104,17 +105,10 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
     return "Error";
   }
 
-  const auto rawJsonLength = static_cast<int>(rawJson.length());
   Json::Value root;
-  JSONCPP_STRING err;
-
-  Json::CharReaderBuilder builder;
-  const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-  if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJsonLength, &root,
-                      &err)) {
-    // t_curr.set_text("Error");
-    std::cerr << "Error: unable to parse json" << err << std::endl;
-    return "Error";
+  if (!MyJsonHelper::build_json_root(root, rawJson))
+  {
+    return "Error fetching";
   }
 
   std::string output = root["choices"][0]["message"]["content"].asString();
@@ -123,6 +117,8 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
 }
 
 /*
+Example Response from Groq API:
+
 {
   "id": "chatcmpl-fa5fea3e-61b8-4c13-88f4-c28808b5e87e",
   "object": "chat.completion",

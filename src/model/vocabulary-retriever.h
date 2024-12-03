@@ -5,6 +5,12 @@
 
 #include "vocab-item.h"
 
+/*
+
+----------This is an INTERFACE class
+
+*/
+
 class VocabularyRetriever
 {
 public:
@@ -17,20 +23,7 @@ public:
 static VocabularyRetriever *p_inst;
 
   static VocabularyRetriever* get_instance();
-  // {
-  //   if (!p_inst)
-  //   {
-  //     #ifdef USE_SQLITE_FOR_VOCAB_DATABASE
-  //       // p_inst = new SqlliteVocabularyRetriever();
-  //     #else
-  //       JsonVocabularyRetriever* json_ptr = new JsonVocabularyRetriever();
-  //       p_inst = json_ptr;
-  //     #endif 
-  //   }
-    
-  //   std::cout << "accessing singleton VocabRetriever" << std::endl;
-  //   return p_inst;
-  // }
+
 
   virtual VocabItem get_vocab_item() = 0;
 

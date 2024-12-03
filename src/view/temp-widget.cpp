@@ -10,6 +10,7 @@
 #include "temp-widget.h"
 // #include "src/controller/time-helper.h"
 #include "../controller/time-helper.h"
+#include "../libs/my-json-helper.h"
 
 TempWidget::TempWidget()
 {
@@ -80,18 +81,14 @@ void TempWidget::update_current_temp()
   }
   std::cout << rawJson << std::endl;
 
-  const auto rawJsonLength = static_cast<int>(rawJson.length());
   Json::Value root;
-  JSONCPP_STRING err;
-
-  Json::CharReaderBuilder builder;
-  const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-  if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJsonLength, &root,
-                      &err)) {
+  if (!MyJsonHelper::build_json_root(root, rawJson))
+  {
     t_curr.set_text("Error");
-    std::cerr << "Error: unable to parse json" << err << std::endl;
     return;
   }
+
+
   temp_current = stof(root["data"][0]["coordinates"][0]["dates"][0]["value"].asString());
   std::cout << "current temp: " << temp_current << std::endl;
 

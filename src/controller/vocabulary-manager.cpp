@@ -1,6 +1,7 @@
 
 
 #include "vocabulary-manager.h"
+#include "../model/vocabulary-retriever.h"
 #include "../model/vocab-item.h"
 #include "../libs/sentence-fetcher.h"
 
