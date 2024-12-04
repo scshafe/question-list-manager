@@ -10,15 +10,12 @@ QuestionCard::QuestionCard() :
 Gtk::Bin(),
 button()
 {
-
-  // VocabularyRetriever* vr = VocabularyRetriever::get_instance();
-
   VocabularyManager* vm = VocabularyManager::get_instance();
   vocab_item = vm->get_next_vocab_item();
 
   select_text = 0;
   button.set_label(get_text_item());
-  
+
   add(button);
   button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_question_clicked));
   show_all_children();

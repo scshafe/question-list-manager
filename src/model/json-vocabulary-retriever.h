@@ -3,12 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <json/json.h>
 
 #include "vocabulary-retriever.h"
 
 class JsonVocabularyRetriever : public VocabularyRetriever
 {
-  std::vector<VocabItem> vocab_words;
+  Json::Value root;
+  std::vector<int> vocab_word_indices;
 
   void initialize_vocab(std::string filename);
 

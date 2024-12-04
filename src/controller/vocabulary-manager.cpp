@@ -9,7 +9,7 @@ VocabularyManager* VocabularyManager::p_inst = nullptr;
 
 VocabularyManager::VocabularyManager()
 {
-  words;
+  VocabularyRetriever* vr = VocabularyRetriever::get_instance();
 }
 
 VocabularyManager::~VocabularyManager()
@@ -28,9 +28,9 @@ VocabularyManager* VocabularyManager::get_instance()
 
 VocabItem VocabularyManager::get_next_vocab_item()
 {
-  VocabItem vocab_item;
-  vocab_item.word = "erudite";
-  vocab_item.definition = "sophisticated";
+  VocabularyRetriever* vr = VocabularyRetriever::get_instance();
+
+  VocabItem vocab_item = vr->get_vocab_item();
 
   // VocabularyRetriever* vr = VocabularyManager::get_instance();
   SentenceFetcher* sf = SentenceFetcher::get_instance();

@@ -53,3 +53,23 @@ You will need a username and password with meteomatics (free accounts for non-bu
 $ export BBB_WEATHER_USERNAME=username
 $ export BBB_WEATHER_PASSWORD=password
 ```
+
+
+### Json Vocab Database
+
+If you'd like to load a vocabulary list in json format: Put it in a file named "vocabulary-list.json" and format it as follows:
+
+```
+{
+  "word_list": [
+    {
+      "word": "word-1",
+      "definition": "definition-1 (optional)"
+    },
+    {
+      "word": "word-2",
+      "definition": "definition-2 (optional)"
+    }
+  ]
+}
+```
