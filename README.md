@@ -73,3 +73,16 @@ If you'd like to load a vocabulary list in json format: Put it in a file named "
   ]
 }
 ```
+
+# Install Boost
+
+The Boost libary called `program_options` is required to build and run this application. Download boost as shown here:
+
+https://www.boost.org/doc/libs/1_86_0/more/getting_started/unix-variants.html#get-boost
+
+and unzip it. You will need to build it on the target, but you can manage to build/install only the necessary library, instead of the entire boost library. Follow the instructions in Section 5.2, and then install with the command:
+
+```
+# b2 install --with-program_options
+```
+

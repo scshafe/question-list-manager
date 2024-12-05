@@ -1,6 +1,7 @@
 #include <gtkmm/application.h>
 #include "src/view/main-window.h"
 #include <iostream>
+#include <boost/program_options.hpp>
 
 int main(int argc, char **argv)
 {
