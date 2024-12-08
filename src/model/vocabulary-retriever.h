@@ -22,7 +22,7 @@ public:
 
 static VocabularyRetriever *p_inst;
 
-  static VocabularyRetriever* get_instance();
+  static VocabularyRetriever* get_instance(std::string filename = "/home/debian/vocabulary-words.json");
 
 
   virtual VocabItem get_vocab_item() = 0;

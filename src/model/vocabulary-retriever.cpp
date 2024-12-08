@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "vocabulary-retriever.h"
 #include "json-vocabulary-retriever.h"
@@ -17,14 +18,14 @@ VocabularyRetriever::~VocabularyRetriever()
 }
 
 
-VocabularyRetriever* VocabularyRetriever::get_instance()
+VocabularyRetriever* VocabularyRetriever::get_instance(std::string filename /*= "/home/debian/vocabulary-words.json"*/)
 {
   if (!p_inst)
   {
     #ifdef USE_SQLITE_FOR_VOCAB_DATABASE
       // p_inst = new SqlliteVocabularyRetriever();
     #else
-      JsonVocabularyRetriever* json_ptr = new JsonVocabularyRetriever();
+      JsonVocabularyRetriever* json_ptr = new JsonVocabularyRetriever(filename);
       p_inst = json_ptr;
     #endif 
   }

@@ -1,6 +1,9 @@
 #ifndef GROQ_SENTENCE_FETCHER_H
 #define GROQ_SENTENCE_FETCHER_H
 
+#include <string>
+
+
 #include "sentence-fetcher.h"
 
 class GroqSentenceFetcher : public SentenceFetcher

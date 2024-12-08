@@ -15,8 +15,6 @@
 JsonVocabularyRetriever::JsonVocabularyRetriever()
 {
   std::string filename = "/home/debian/vocabulary-words.json";
-
-
   
   initialize_vocab(filename);
 

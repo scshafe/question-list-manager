@@ -9,6 +9,11 @@
 #include "groq-sentence-fetcher.h"
 #include "../libs/my-json-helper.h"
 
+// GroqSentenceFetcher::GroqSentenceFetcher()
+// {
+//   // Should never be called
+// }
+
 GroqSentenceFetcher::GroqSentenceFetcher()
 {
   curl_url = "https://api.groq.com/openai/v1/chat/completions";
