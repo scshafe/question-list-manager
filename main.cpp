@@ -59,6 +59,7 @@ int main(int argc, char **argv)
   if (vm.count("database-file"))
   {
     database_file = vm["database-file"].as<std::string>();
+    VocabularyRetriever::set_database_file(database_file);
     std::cout << "vocabulary database file location was set to " 
                 << vm["database-file"].as<std::string>() << std::endl;
   } else 
@@ -95,7 +96,7 @@ int main(int argc, char **argv)
   }
 
 
-  VocabularyRetriever* vr = VocabularyRetriever::get_instance(database_file);
+  
 
   auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 

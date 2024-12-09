@@ -21,8 +21,10 @@ public:
 public:
 
 static VocabularyRetriever *p_inst;
+static std::string database_file;
 
-  static VocabularyRetriever* get_instance(std::string filename = "/home/debian/vocabulary-words.json");
+  static void set_database_file(std::string database_file);
+  static VocabularyRetriever* get_instance();
 
 
   virtual VocabItem get_vocab_item() = 0;
