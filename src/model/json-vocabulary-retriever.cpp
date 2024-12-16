@@ -34,7 +34,7 @@ JsonVocabularyRetriever::~JsonVocabularyRetriever()
 
 void JsonVocabularyRetriever::initialize_vocab(std::string filename)
 {
-  std::cout << "Initialzing json vocab" << std::endl;
+  std::cout << "Initialzing json vocab from: " << filename << std::endl;
 
   std::ifstream in(filename);
   std::string rawJson;
