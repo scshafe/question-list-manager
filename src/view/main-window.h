@@ -18,6 +18,9 @@ public:
   MainWindow();
   virtual ~MainWindow();
 
+  // void toggle_day_night(int timer_number);
+  bool toggle_day_night();
+
 protected:
   //Signal handlers:
   void on_button_clicked();
@@ -37,6 +40,7 @@ protected:
 
   void switch_to_day();
   void switch_to_night();
+
 };
 
 #endif
