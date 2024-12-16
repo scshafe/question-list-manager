@@ -2,48 +2,53 @@
 #include <gtkmm/button.h>
 #include <gtkmm/window.h>
 #include <gtkmm/application.h>
+#include <gtkmm/stack.h>
+
+#include <gdkmm/color.h>
 
 #include <iostream>
 
 #include "main-window.h"
 
 MainWindow::MainWindow()
-: app_container(Gtk::ORIENTATION_VERTICAL),
+: view_stacker(),
+  day_container(Gtk::ORIENTATION_VERTICAL),
   header(),
-  question_card()
-// : m_button("Hello World")   // creates a new button with label "Hello World".
+  question_card(),
+  night_time_widget()
 {
-  // Sets the border width of the window.
-  // set_border_width(50);
 
   // (widgth, height)  480x272 are the LCD cape screen dimensions from 4dsystems
   set_default_size(480, 272);
 
-  add(app_container);
+  // Gtk::Stack allows switching back and forth between child Gtk objects
+  add(view_stacker);
 
-  app_container.pack_start(header, Gtk::PACK_SHRINK);
-
+  // Add and initialize the day time container
+  view_stacker.add(day_container);
+  day_container.pack_start(header, Gtk::PACK_SHRINK);
   header.set_vexpand(false);
-  header.set_valign(Gtk::ALIGN_BASELINE);
-  // header.show();
+  header.set_valign(Gtk::ALIGN_BASELINE);  
 
-  // When the button receives the "clicked" signal, it will call the
-  // on_button_clicked() method defined below.
-  // question_card.signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_button_clicked));
-  // question_card.signal_clicked().connect(sigc::mem_fun(*this,
-  //             &question_card.on_question_clicked)));
-  // This packs the button into the Window (a container).
-  
-  app_container.pack_start(question_card);
-
+  day_container.pack_start(question_card);
   question_card.set_vexpand(true);
   question_card.set_valign(Gtk::ALIGN_FILL);
-  // add(question_card);
+  
 
-  // The final step is to display this newly created widget...
-  // question_card.show();
+  // Add the night time widget
+  view_stacker.add(night_time_widget);
 
-  show_all_children();
+  day_color.set_red(1.0);
+  day_color.set_green(1.0);
+  day_color.set_blue(1.0);
+  day_color.set_alpha(1.0);  
+
+  night_color.set_red(1.0);
+  night_color.set_green(0.0);
+  night_color.set_blue(0.0);
+  night_color.set_alpha(0.7);
+
+  show_all();
 }
 
 
@@ -55,4 +60,16 @@ MainWindow::~MainWindow()
 void MainWindow::on_button_clicked()
 {
   std::cout << "MainWindow button clicked" << std::endl;
+}
+
+void MainWindow::switch_to_day()
+{
+  view_stacker.set_visible_child(day_container);
+  override_background_color(day_color);
+}
+
+void MainWindow::switch_to_night()
+{
+  view_stacker.set_visible_child(night_time_widget);
+  override_background_color(night_color);
 }

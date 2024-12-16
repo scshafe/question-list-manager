@@ -3,6 +3,9 @@
 
 #include <gtkmm/window.h>
 #include <gtkmm/box.h>
+#include <gtkmm/stack.h>
+
+#include <gdkmm/color.h>
 
 #include "header-widget.h"
 #include "question-card.h"
@@ -20,11 +23,20 @@ protected:
   void on_button_clicked();
 
   //Container Widgets: (for holding member widgets)
-  Gtk::Box app_container;
+  Gtk::Stack view_stacker;
+
+  Gtk::Box day_container;
+
+  Gdk::RGBA day_color;
+  Gdk::RGBA night_color;
 
   //Member widgets:
   Header header;
   QuestionCard question_card;
+  TimeWidget night_time_widget;
+
+  void switch_to_day();
+  void switch_to_night();
 };
 
 #endif
