@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "main-window.h"
+#include "../controller/time-helper.h"
 
 
 MainWindow::MainWindow()
@@ -50,13 +51,18 @@ MainWindow::MainWindow()
   night_color.set_blue(0.0);
   night_color.set_alpha(0.7);
 
-  switch_to_day();
-  is_day = true;
+  if (is_day())
+  {
+    switch_to_day();
+  }
+  else
+  {
+    switch_to_night();
+  }
 
   show_all();
 
-  timeout_value = 4000;
-  m_timer_number = 0;
+  
   
   // sigc::connection Glib::SignalTimeout::connect(const sigc::slot<bool>& slot,
   //                                     unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);
@@ -72,7 +78,7 @@ MainWindow::MainWindow()
   // sigc::connection conn = Glib::signal_timeout().connect(my_slot,
   //         timeout_value);
 
-  Glib::signal_timeout().connect(sigc::mem_fun(*this, &MainWindow::toggle_day_night), timeout_value);
+  Glib::signal_timeout().connect(sigc::mem_fun(*this, &MainWindow::toggle_day_night), time_until_sun_change());
 }
 
 
@@ -102,14 +108,11 @@ void MainWindow::switch_to_night()
 bool MainWindow::toggle_day_night()
 {
   if ((void *)(view_stacker.get_visible_child()) == (void *)&night_time_widget)
-  // if (!is_day)
   {
-    is_day = true;
     switch_to_day();
   }
   else
   {
-    is_day = false;
     switch_to_night();
   }
   return true;
