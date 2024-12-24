@@ -34,8 +34,6 @@ int main(int argc, char **argv)
   // ;
   
 
-
-
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);  // stores the variables from command-line
   po::notify(vm);

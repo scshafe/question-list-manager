@@ -14,7 +14,8 @@ bool MyJsonHelper::build_json_root(Json::Value &root, std::string rawJson)
   if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJsonLength, &root,
                       &err)) {
     std::cerr << "Error: unable to parse json" << err << std::endl;
-    return false;
+    throw std::runtime_error("Error! exception thrown - unable to parse raw json");
+    // return false;
   }
   return true;
 }

@@ -82,39 +82,36 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
   std::string rawJson;
 
   easy_handle = curl_easy_init();
-  if (easy_handle)
+  if (!easy_handle)
   {
-    curl_easy_setopt(easy_handle, CURLOPT_URL, curl_url.c_str());
-    curl_easy_setopt(easy_handle, CURLOPT_WRITEFUNCTION, WriteCallbackGroq);
-    curl_easy_setopt(easy_handle, CURLOPT_WRITEDATA, &rawJson);
-
-    curl_easy_setopt(easy_handle, CURLOPT_POST, 1);
-    std::string data = buildJsonPostData(word);
-    curl_easy_setopt(easy_handle, CURLOPT_POSTFIELDS, data.c_str());
-
-    struct curl_slist *list;
-    list = curl_slist_append(NULL, "Content-Type: application/json");
-    list = curl_slist_append(list, groq_api_authorization.c_str());
-
-    curl_easy_setopt(easy_handle, CURLOPT_HTTPHEADER, list);
-
-    res = curl_easy_perform(easy_handle);
-
-    curl_slist_free_all(list);
-    curl_easy_cleanup(easy_handle);
-
-  }
-  else
-  {
-    std::cerr << "Error: invalid easy_handle for fetching example sentence" << std::endl;
-    return "Error";
+    throw std::runtime_error("Error! exception thrown - curl_easy_init() failed");
   }
 
+  curl_easy_setopt(easy_handle, CURLOPT_URL, curl_url.c_str());
+  curl_easy_setopt(easy_handle, CURLOPT_WRITEFUNCTION, WriteCallbackGroq);
+  curl_easy_setopt(easy_handle, CURLOPT_WRITEDATA, &rawJson);
+
+  curl_easy_setopt(easy_handle, CURLOPT_POST, 1);
+  std::string data = buildJsonPostData(word);
+  curl_easy_setopt(easy_handle, CURLOPT_POSTFIELDS, data.c_str());
+
+  struct curl_slist *list;
+  list = curl_slist_append(NULL, "Content-Type: application/json");
+  list = curl_slist_append(list, groq_api_authorization.c_str());
+
+  curl_easy_setopt(easy_handle, CURLOPT_HTTPHEADER, list);
+  res = curl_easy_perform(easy_handle);
+  curl_slist_free_all(list);
+  curl_easy_cleanup(easy_handle);
+  if (res != CURLE_OK)
+  {
+    throw std::runtime_error("Error! exception thrown - curl failed, check network connection");
+  }
+
+
+  // Now handle the JSON response
   Json::Value root;
-  if (!MyJsonHelper::build_json_root(root, rawJson))
-  {
-    return "Error fetching";
-  }
+  MyJsonHelper::build_json_root(root, rawJson);
 
   std::string output = root["choices"][0]["message"]["content"].asString();
   std::cout << output << std::endl;
