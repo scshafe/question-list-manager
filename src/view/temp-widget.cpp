@@ -17,12 +17,17 @@ TempWidget::TempWidget()
   if (!weather_api_credentials_valid())
   {
     t_curr.set_text("Weather credentials not set");
+    char *markup = g_markup_escape_text("<span color=\"blue\" foreground=\"blue\"></span>", -1);
+    t_curr.set_markup(markup);
     pack_start(t_curr);
   }
   else
   {
     update_weather();
-
+ //   char *markup = g_markup_escape_text("<span color=\"blue\" foreground=\"blue\">%d</span>", t_high);
+ //   t_curr.set_markup(markup);
+ //   t_high.set_markup(markup);
+ 
     pack_start(t_curr);
     pack_start(t_high);
     pack_start(t_low);
@@ -97,11 +102,22 @@ void TempWidget::update_current_temp()
 
 void TempWidget::update_daily_high_and_low()
 {
-  
-  t_high.set_text(print_temp(100.0));
+  char *temp_color = get_temp_color_code(temp_high);
+  char *markup = g_markup_printf_escaped("<span color=\"%s\">%d</span>", temp_color, temp_high);
+    t_high.set_markup(markup);
+
+//  t_high.set_text(print_temp(100.0));
   t_low.set_text(print_temp(0.0));
 }
 
+char *TempWidget::get_temp_color_code(float temp)
+{
+	if (temp > 50.0)
+	{
+		return "red";
+	}
+	return "blue";
+}
 
 void TempWidget::update_weather()
 {

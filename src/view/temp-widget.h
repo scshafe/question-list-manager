@@ -22,6 +22,7 @@ private:
   Gtk::Label t_high;
   Gtk::Label t_low;
 
+  char* get_temp_color_code(float temp);
   void update_current_temp();
   void update_daily_high_and_low();
   void update_weather();
