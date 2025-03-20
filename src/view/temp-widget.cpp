@@ -67,9 +67,7 @@ void TempWidget::update_current_temp()
     if(res != CURLE_OK)
     {
       t_curr.set_text("Error");
-      std::cerr << "Error: curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
-      ColorPrinter cp;
-      cp.print_error("CURRENT TEMP EASY CURL FAIL");
+      CP::print_error("curl_easy_perform() failed: ", curl_easy_strerror(res));
       return;
     }
 

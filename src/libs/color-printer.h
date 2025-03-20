@@ -5,13 +5,28 @@
 #include <iostream>
 #include <string>
 #include "color.hpp"
-
-class ColorPrinter
+#include <sstream>
+namespace ColorPrinter
 {
-public:
-  void print_error(std::string error_message);
-  
+//template <typename ... Args >
+//void print_error(Args ... args);
+ 
+template <typename ... Args >
+void print_error(Args ... args)
+{
+    std::stringstream ss;
+    (ss << "Error: " << ... << args);
+    std::cout << termcolor::red << ss.str() << termcolor::reset << std::endl;
+}
+
+
+// void print_error(std::string error_message);
+  void print_info(std::string& message);
+  void print_warning(std::string& message);
+
+ 
 };
 
+namespace CP = ColorPrinter;
 
 #endif

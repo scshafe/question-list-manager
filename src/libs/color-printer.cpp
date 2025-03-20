@@ -2,9 +2,20 @@
 
 
 #include "color-printer.h"
+#include <sstream>
+#include <iostream>
 
 
-void ColorPrinter::print_error(std::string error_message)
+
+void ColorPrinter::print_info(std::string& message)
 {
-    std::cout << termcolor::red << "Error:" << termcolor::blue << error_message << std::endl;
-  }
+    std::cout << termcolor::reset << message << std::endl;
+}
+
+
+void ColorPrinter::print_warning(std::string& message)
+{
+    std::cout << termcolor::green << message << termcolor::reset << std::endl;
+}
+
+
