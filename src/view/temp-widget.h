@@ -32,6 +32,8 @@ private:
   std::string create_weather_url();
   std::string print_temp(const float& temp);
 
+  char* get_temp_markup_string(float temp);
+  void release_temp_markup_string(char* markup);
 };
 
 

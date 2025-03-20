@@ -17,16 +17,11 @@ TempWidget::TempWidget()
   if (!weather_api_credentials_valid())
   {
     t_curr.set_text("Weather credentials not set");
-    char *markup = g_markup_escape_text("<span color=\"blue\" foreground=\"blue\"></span>", -1);
-    t_curr.set_markup(markup);
     pack_start(t_curr);
   }
   else
   {
     update_weather();
- //   char *markup = g_markup_escape_text("<span color=\"blue\" foreground=\"blue\">%d</span>", t_high);
- //   t_curr.set_markup(markup);
- //   t_high.set_markup(markup);
  
     pack_start(t_curr);
     pack_start(t_high);
@@ -97,27 +92,22 @@ void TempWidget::update_current_temp()
   temp_current = stof(root["data"][0]["coordinates"][0]["dates"][0]["value"].asString());
   std::cout << "current temp: " << temp_current << std::endl;
 
-  t_curr.set_text(print_temp(temp_current));
+  char *markup = get_temp_markup_string(temp_current);
+  t_curr.set_markup(markup);
+  release_temp_markup_string(markup);
 }
 
 void TempWidget::update_daily_high_and_low()
 {
-  char *temp_color = get_temp_color_code(temp_high);
-  char *markup = g_markup_printf_escaped("<span color=\"%s\">%d</span>", temp_color, temp_high);
-    t_high.set_markup(markup);
-
-//  t_high.set_text(print_temp(100.0));
-  t_low.set_text(print_temp(0.0));
+  char *markup_high = get_temp_markup_string(temp_high);  
+  t_high.set_markup(markup_high);
+  release_temp_markup_string(markup_high);
+  
+  char *markup_low = get_temp_markup_string(temp_low);
+  t_low.set_markup(markup_low);
+  release_temp_markup_string(markup_low);
 }
 
-char *TempWidget::get_temp_color_code(float temp)
-{
-	if (temp > 50.0)
-	{
-		return "red";
-	}
-	return "blue";
-}
 
 void TempWidget::update_weather()
 {
@@ -150,3 +140,23 @@ std::string TempWidget::print_temp(const float& temp)
 }
 
 
+char *TempWidget::get_temp_color_code(float temp)
+{
+	if (temp < 20.0) return "blue";
+	if (temp < 40.0) return "green";
+	if (temp < 60.0) return "yellow";
+	if (temp < 80.0) return "orange";
+	return "red";
+}
+
+char *TempWidget::get_temp_markup_string(float temp)
+{
+  char *temp_color = get_temp_color_code(temp);
+  char *markup = g_markup_printf_escaped("<span color=\"%s\">%d</span>", temp_color, temp);
+  return markup;
+}
+
+void TempWidget::release_temp_markup_string(char* markup)
+{
+  g_free(markup);
+}
