@@ -11,7 +11,7 @@ namespace po = boost::program_options;
 
 int main(int argc, char **argv)
 {
-
+  system("color 41");
   // Command-line **only** options
   po::options_description desc("Allowed options");
   desc.add_options()

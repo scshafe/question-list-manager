@@ -11,6 +11,7 @@
 // #include "src/controller/time-helper.h"
 #include "../controller/time-helper.h"
 #include "../libs/my-json-helper.h"
+#include "../libs/color-printer.h"
 
 TempWidget::TempWidget()
 {
@@ -67,6 +68,8 @@ void TempWidget::update_current_temp()
     {
       t_curr.set_text("Error");
       std::cerr << "Error: curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+      ColorPrinter cp;
+      cp.print_error("CURRENT TEMP EASY CURL FAIL");
       return;
     }
 
