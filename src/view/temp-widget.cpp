@@ -152,7 +152,7 @@ char *TempWidget::get_temp_color_code(float temp)
 char *TempWidget::get_temp_markup_string(float temp)
 {
   char *temp_color = get_temp_color_code(temp);
-  char *markup = g_markup_printf_escaped("<span color=\"%s\">%d</span>", temp_color, temp);
+  char *markup = g_markup_printf_escaped("<span color=\"%s\">%d°F</span>", temp_color, temp);
   return markup;
 }
 
