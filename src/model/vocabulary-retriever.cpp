@@ -1,16 +1,17 @@
-#include <iostream>
 #include <string>
 
 #include "vocabulary-retriever.h"
 #include "json-vocabulary-retriever.h"
+#include "../libs/color-printer.h"
+
+
 
 VocabularyRetriever* VocabularyRetriever::p_inst = nullptr;
 std::string VocabularyRetriever::database_file = "/home/debian/vocabulary-words.json";
 
 VocabularyRetriever::VocabularyRetriever()
 {
-  std::cout << "VocabularyRetriever constructor" << std::endl;
-
+  CP::print_info("VocabularyRetriever constructor");
 }
 
 VocabularyRetriever::~VocabularyRetriever()
@@ -36,6 +37,6 @@ VocabularyRetriever* VocabularyRetriever::get_instance()
     #endif 
   }
   
-  std::cout << "accessing singleton VocabularyRetriever" << std::endl;
+  CP::print_info("accessing singleton VocabularyRetriever");
   return p_inst;
 }

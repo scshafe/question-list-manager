@@ -1,13 +1,12 @@
-
-#include <iostream>
 #include <string>
 #include <sstream>
 #include <curl/curl.h>
 #include <json/json.h>
 
-
 #include "groq-sentence-fetcher.h"
 #include "../libs/my-json-helper.h"
+#include "../libs/color-printer.h"
+
 
 // GroqSentenceFetcher::GroqSentenceFetcher()
 // {
@@ -74,7 +73,7 @@ std::string GroqSentenceFetcher::buildJsonPostData(std::string word)
 
 std::string GroqSentenceFetcher::get_sentence(std::string word)
 {
-  std::cout << "Fetching Sentence for: " << word << std::endl;
+  CP::print_info("Fetching Sentence for: ", word);
 
   CURL *easy_handle;
   CURLcode res;
@@ -84,7 +83,7 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
   easy_handle = curl_easy_init();
   if (!easy_handle)
   {
-    throw std::runtime_error("Error! exception thrown - curl_easy_init() failed");
+    throw std::runtime_error("exception thrown - curl_easy_init() failed");
   }
 
   curl_easy_setopt(easy_handle, CURLOPT_URL, curl_url.c_str());
@@ -105,7 +104,7 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
   curl_easy_cleanup(easy_handle);
   if (res != CURLE_OK)
   {
-    throw std::runtime_error("Error! exception thrown - curl failed, check network connection");
+    throw std::runtime_error("exception thrown - curl failed, check network connection");
   }
 
 
@@ -114,7 +113,7 @@ std::string GroqSentenceFetcher::get_sentence(std::string word)
   MyJsonHelper::build_json_root(root, rawJson);
 
   std::string output = root["choices"][0]["message"]["content"].asString();
-  std::cout << output << std::endl;
+  CP::print_info(output);
   return output;
 }
 

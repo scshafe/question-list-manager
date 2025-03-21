@@ -129,7 +129,7 @@ bool TempWidget::weather_api_credentials_valid()
 std::string TempWidget::create_weather_url(){
   std::stringstream ss;
   ss << "https://" << getenv("BBB_WEATHER_USERNAME") << ":" << getenv("BBB_WEATHER_PASSWORD") << "@api.meteomatics.com/" << utc_time_for_weather_api() << "/t_2m:F/41.8755616,-87.6244212/json?model=mix";
-  std::cout << ss.str() << std::endl;
+  CP::print_important("Meteomatics URL: ", ss.str());
   return ss.str();
 }
 

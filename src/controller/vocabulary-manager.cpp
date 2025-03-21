@@ -1,12 +1,14 @@
 
-
+#include <exception>
 #include "vocabulary-manager.h"
+
 #include "../model/vocabulary-retriever.h"
 #include "../model/vocab-item.h"
+
 #include "../libs/sentence-fetcher.h"
 #include "../libs/my-json-helper.h"
+#include "../libs/color-printer.h"
 
-#include <exception>
 
 VocabularyManager* VocabularyManager::p_inst = nullptr;
 
@@ -42,7 +44,7 @@ VocabItem VocabularyManager::get_next_vocab_item()
     vocab_item.example_sentence = sf->get_sentence(vocab_item.word);
   } catch (std::exception& e)
   {
-    std::cout << e.what() << std::endl;
+    CP::print_error(e.what());
   }
   return vocab_item;
 

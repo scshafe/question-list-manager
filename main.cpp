@@ -11,7 +11,7 @@ namespace po = boost::program_options;
 
 int main(int argc, char **argv)
 {
-  CP::print_info("Using C++ standard: ", __cplusplus);
+  CP::print_important("Using C++ standard: ", __cplusplus);
 
 // Command-line **only** options
   po::options_description desc("Allowed options");
@@ -58,10 +58,10 @@ int main(int argc, char **argv)
   {
     database_file = vm["database-file"].as<std::string>();
     VocabularyRetriever::set_database_file(database_file);
-    CP::print_info("vocabulary database file location was set to ", vm["database-file"].as<std::string>());
+    CP::print_important("vocabulary database file location was set to ", vm["database-file"].as<std::string>());
   } else 
   {
-    CP::print_info("vocabulary database file location was not set");
+    CP::print_warning("vocabulary database file location was not set");
   }
 
 
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
   {
     setenv("BBB_WEATHER_USERNAME", vm["weather-api-username"].as<std::string>().c_str(), 1);
     // weather_api_name = vm["weather-api-username"].as<std::string>();
-    CP::print_info("weather-api-username set to: ",  vm["weather-api-username"].as<std::string>());
+    CP::print_important("weather-api-username set to: ",  vm["weather-api-username"].as<std::string>());
   }
   else
   {
@@ -80,13 +80,13 @@ int main(int argc, char **argv)
   {
     setenv("BBB_WEATHER_PASSWORD", vm["weather-api-password"].as<std::string>().c_str(), 1);
     weather_api_pass = vm["weather-api-password"].as<std::string>();
-    CP::print_info("weather-api-password set to: ", vm["weather-api-password"].as<std::string>() );
+    CP::print_important("weather-api-password set to: ", vm["weather-api-password"].as<std::string>() );
   }
 
   if (vm.count("groq-api-key")) 
   { setenv("GROQ_API_KEY", vm["groq-api-key"].as<std::string>().c_str(), 1);
     groq_api_key = vm["groq-api-key"].as<std::string>();
-    CP::print_info("groq-api-key set to: ",  vm["groq-api-key"].as<std::string>());
+    CP::print_important("groq-api-key set to: ",  vm["groq-api-key"].as<std::string>());
   }
 
 

@@ -26,12 +26,21 @@ namespace ColorPrinter
     }
 
     template <typename ... Args >
+    void print_important(Args ... args)
+    {
+        std::stringstream ss;
+        (ss << ... << args);
+        std::cout << termcolor::green << ss.str() << termcolor::reset << std::endl;
+    }
+
+    template <typename ... Args >
     void print_info(Args ... args)
     {
         std::stringstream ss;
         (ss << ... << args);
         std::cout << ss.str() << std::endl;
     }
+
 
 };
 
