@@ -5,13 +5,14 @@
 #include <boost/program_options.hpp>
 
 #include "src/model/vocabulary-retriever.h"
-
+#include "src/libs/color-printer.h"
 namespace po = boost::program_options;
 
 
 int main(int argc, char **argv)
 {
-   std::cout << "Using C++ standard: " << __cplusplus << std::endl; 
+  CP::print_info("Using C++ standard: ", __cplusplus);
+
 // Command-line **only** options
   po::options_description desc("Allowed options");
   desc.add_options()
@@ -45,8 +46,8 @@ int main(int argc, char **argv)
 
   if (vm.count("help")) 
   {
-    std::cout << desc << "\n";
-    return 1;
+    CP::print_info(desc);
+    return 0;
   }
 
   std::string database_file("/home/debian/motion-sensor-configuration/vocabulary-words-test-argument.json");
@@ -57,11 +58,10 @@ int main(int argc, char **argv)
   {
     database_file = vm["database-file"].as<std::string>();
     VocabularyRetriever::set_database_file(database_file);
-    std::cout << "vocabulary database file location was set to " 
-                << vm["database-file"].as<std::string>() << std::endl;
+    CP::print_info("vocabulary database file location was set to ", vm["database-file"].as<std::string>());
   } else 
   {
-    std::cout << "vocabulary database file location was not set" << std::endl;
+    CP::print_info("vocabulary database file location was not set");
   }
 
 
@@ -69,27 +69,24 @@ int main(int argc, char **argv)
   {
     setenv("BBB_WEATHER_USERNAME", vm["weather-api-username"].as<std::string>().c_str(), 1);
     // weather_api_name = vm["weather-api-username"].as<std::string>();
-    std::cout << "weather-api-username set to: "
-              << vm["weather-api-username"].as<std::string>() << std::endl;
+    CP::print_info("weather-api-username set to: ",  vm["weather-api-username"].as<std::string>());
   }
   else
   {
-    std::cerr << "Error: weather-api-username not read in" << std::endl;
+    CP::print_error("Error: weather-api-username not read in");
   }
 
   if (vm.count("weather-api-password")) 
   {
     setenv("BBB_WEATHER_PASSWORD", vm["weather-api-password"].as<std::string>().c_str(), 1);
     weather_api_pass = vm["weather-api-password"].as<std::string>();
-    std::cout << "weather-api-password set to: "
-              << vm["weather-api-password"].as<std::string>() << std::endl;
+    CP::print_info("weather-api-password set to: ", vm["weather-api-password"].as<std::string>() );
   }
 
   if (vm.count("groq-api-key")) 
   { setenv("GROQ_API_KEY", vm["groq-api-key"].as<std::string>().c_str(), 1);
     groq_api_key = vm["groq-api-key"].as<std::string>();
-    std::cout << "groq-api-key set to: "
-              << vm["groq-api-key"].as<std::string>() << std::endl;
+    CP::print_info("groq-api-key set to: ",  vm["groq-api-key"].as<std::string>());
   }
 
 
