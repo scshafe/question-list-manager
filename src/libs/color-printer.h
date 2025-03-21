@@ -8,23 +8,31 @@
 #include <sstream>
 namespace ColorPrinter
 {
-//template <typename ... Args >
-//void print_error(Args ... args);
- 
-template <typename ... Args >
-void print_error(Args ... args)
-{
-    std::stringstream ss;
-    (ss << "Error: " << ... << args);
-    std::cout << termcolor::red << ss.str() << termcolor::reset << std::endl;
-}
+    
+    template <typename ... Args >
+    void print_error(Args ... args)
+    {
+        std::stringstream ss;
+        (ss << "Error: " << ... << args);
+        std::cout << termcolor::red << ss.str() << termcolor::reset << std::endl;
+    }
 
+    template <typename ... Args >
+    void print_warning(Args ... args)
+    {
+        std::stringstream ss;
+        (ss << "Warning: " << ... << args);
+        std::cout << termcolor::bright_magenta << ss.str() << termcolor::reset << std::endl;
+    }
 
-// void print_error(std::string error_message);
-  void print_info(std::string& message);
-  void print_warning(std::string& message);
+    template <typename ... Args >
+    void print_info(Args ... args)
+    {
+        std::stringstream ss;
+        (ss << ... << args);
+        std::cout << ss.str() << std::endl;
+    }
 
- 
 };
 
 namespace CP = ColorPrinter;
