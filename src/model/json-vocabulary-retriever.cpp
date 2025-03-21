@@ -10,7 +10,7 @@
 #include "vocabulary-retriever.h"
 #include "json-vocabulary-retriever.h"
 #include "../libs/my-json-helper.h"
-
+#include "../libs/color-printer.h"
 
 JsonVocabularyRetriever::JsonVocabularyRetriever()
 {
@@ -34,29 +34,25 @@ JsonVocabularyRetriever::~JsonVocabularyRetriever()
 
 void JsonVocabularyRetriever::initialize_vocab(std::string filename)
 {
-  std::cout << "Initialzing json vocab from: " << filename << std::endl;
+  CP::print_info("Initialzing json vocab from: ", filename);
 
   std::ifstream in(filename);
   std::string rawJson;
   std::string line;
 
-
   while(getline(in, line))
   {
     rawJson += line;
   }
-
-  std::cout << rawJson << std::endl;
   in.close();
 
-
-  
+  // build Json::Root
   if (!MyJsonHelper::build_json_root(root, rawJson))
   {
-    std::cerr << "Error Initializing vocab retriever" << std::endl;
+    CP::print_error("Error Initializing vocab retriever");
     return;
   }
-
+  CP::print_info(root.toStyledString());
   int list_length = root["word_list"].size();
 
   for (int i = 0; i < list_length; i++)
@@ -67,11 +63,11 @@ void JsonVocabularyRetriever::initialize_vocab(std::string filename)
   auto rng = std::default_random_engine {};
   std::shuffle(std::begin(vocab_word_indices), std::end(vocab_word_indices), rng);
 
-  for (int i = 0; i < list_length; i++)
-  {
-    std::cout << vocab_word_indices[i] << " ";
-  }
-  std::cout << std::endl;
+//  for (int i = 0; i < list_length; i++)
+//  {
+//    std::cout << vocab_word_indices[i] << " ";
+//  }
+//  std::cout << std::endl;
 }
 
 VocabItem JsonVocabularyRetriever::get_vocab_item()
