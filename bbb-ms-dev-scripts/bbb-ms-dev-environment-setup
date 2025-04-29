@@ -1,5 +1,11 @@
+
+echo -e "\nSourcing bbb-ms-dev-environment-setup\n\n"
+
+
 # ------ Source all relevant paths ------
-source "bbb-ms-dev-scripts/setup.config"
+if [[ -z "$BBB_DEV_ENV_ACTIVATED" ]]; then
+  source "bbb-ms-dev-scripts/setup.config"
+fi
 
 
 # if this variable is not set yet, then we first need to open tmux session
@@ -15,17 +21,14 @@ if [[ -z "$TMUX" && "$HOSTNAME" = $HOST_HOSTNAME ]]; then
   fi
     
 else
-
-
-  BBB_DEV_ENV_ACTIVATED="true"
   
-  if [[ "$HOSTNAME" = '$HOST_HOSTNAME' ]]; then
-    source bbb-ms-dev-scripts/host/setup-host-env
+  if [[ "$HOSTNAME" = "$HOST_HOSTNAME" ]]; then
+    source $HOST_DIR/bbb-ms-dev-scripts/host/setup-host-env
   
-  elif [ "$HOSTNAME" = '$VBOX_HOSTNAME' ]; then
-    source bbb-ms-dev-scripts/vbox/setup-vbox-env
-  elif [ "$HOSTNAME" = 'BBB_HOSTNAME' ]; then
-    source bbb-ms-dev-scripts/bbb/setup-bbb-env
+  elif [ "$HOSTNAME" = "$VBOX_HOSTNAME" ]; then
+    source $VBOX_DIR/bbb-ms-dev-scripts/vbox/setup-vbox-env
+  elif [ "$HOSTNAME" = "BBB_HOSTNAME" ]; then
+    source $BBB_DIR/bbb-ms-dev-scripts/bbb/setup-bbb-env
   fi
 fi
 

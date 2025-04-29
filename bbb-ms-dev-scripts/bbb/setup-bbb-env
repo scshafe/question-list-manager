@@ -1,3 +1,5 @@
+echo -e "\nSourcing setup-bbb-env\n\n"
+
 alias brightness0='echo 0 | sudo tee /sys/class/backlight/backlight/brightness'
 alias brightness100='echo 100 | sudo tee /sys/class/backlight/backlight/brightness'
 alias brightness50='echo 50 | sudo tee /sys/class/backlight/backlight/brightness'
