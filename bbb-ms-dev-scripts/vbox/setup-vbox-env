@@ -1,0 +1,12 @@
+echo -e "\n\n Running setup-vbox-env\n\n"
+
+alias ssh-bbb="ssh -p $BBB_PORT $BBB_USER@BBB_ADDRESS"
+alias scp-scripting-dir="scp -P $BBB_PORT -r $VBOX_DIR/bbb-ms-dev-scripts $BBB_USER@$BBB_ADDRESS:$BBB_DIR"
+
+alias upload-new-embedded-executable="scp -P $BBB_PORT $VBOX_DIR/build/EMBEDDED-GUI $BBB_USER@$BBB_ADDRESS:$BBB_DIR"
+
+scp-scripting-dir
+
+echo -e "\nRunning bbb-ms-dev-scripts/vbox-connect-to-internet\n"
+sudo $VBOX_DIR/bbb-ms-dev-scripts/vbox/connect-to-internet
+

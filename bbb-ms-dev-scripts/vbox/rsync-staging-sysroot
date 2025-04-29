@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# make sure to first run:
+# $: source env-crosscompile
+
+if [[ -z "${BBB_CROSS_SYSROOT}" ]]; then
+    echo "Error: must first run\n$: source env-bbb"
+    exit 1;
+fi
+
+
+
+# command found here (in chapter 3): https://github.com/robamu-org/beaglebone-crosscompiling?tab=readme-ov-file
+rsync -avHAXR --delete-after --info=progress2 --numeric-ids debian@192.168.6.2:/{usr,lib,home/debian/boost_1_82_0} $BBB_CROSS_SYSROOT
+
+
+fix-symlinks-in-cloned_sysroot.py

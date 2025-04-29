@@ -1,0 +1,2 @@
+alias ssh-vbox-bbb="ssh -t -p $VBOX_PORT $VBOX_USER@$VBOX_ADDRESS"
+

@@ -1,0 +1,31 @@
+# ------ Source all relevant paths ------
+source "bbb-ms-dev-scripts/setup.config"
+
+
+# if this variable is not set yet, then we first need to open tmux session
+if [[ -z "$TMUX" && "$HOSTNAME" = $HOST_HOSTNAME ]]; then
+    
+  # but first check to make sure the user is in the parent directory
+  # !!! need to add in checks for remote laptop later !!!
+  read -p "Are you in the parent directory of question-list-manager? [y/n]" user_response
+  if [[ "$user_response" != "y" ]]; then
+    echo "Please go to the base directory of question-list manager before running: source bbb-ms-dev-scripts/bbb-ms-dev-environment-setup"
+  else
+    tmux -f "bbb-ms-dev-scripts/host/tmux-dev-session.conf" attach-session -t bbb-dev
+  fi
+    
+else
+
+
+  BBB_DEV_ENV_ACTIVATED="true"
+  
+  if [[ "$HOSTNAME" = '$HOST_HOSTNAME' ]]; then
+    source bbb-ms-dev-scripts/host/setup-host-env
+  
+  elif [ "$HOSTNAME" = '$VBOX_HOSTNAME' ]; then
+    source bbb-ms-dev-scripts/vbox/setup-vbox-env
+  elif [ "$HOSTNAME" = 'BBB_HOSTNAME' ]; then
+    source bbb-ms-dev-scripts/bbb/setup-bbb-env
+  fi
+fi
+

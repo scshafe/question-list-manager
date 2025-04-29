@@ -1,0 +1,13 @@
+#!/bin/bash                                                                     
+
+
+# the interface here is for external facing network (whatever local ip of router is)
+sudo iptables --table nat --append POSTROUTING --out-interface $EXTERNAL_INTERNET_INTERFACE -j MASQUERADE
+
+# this interface is for the bbb (ip: 192.168.6.0)
+#sudo iptables --append FORWARD --in-interface enp0s3 -j ACCEPT
+sudo iptables --append FORWARD --in-interface $BBB_INTERNET_INTERFACE -j ACCEPT
+
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+
+
