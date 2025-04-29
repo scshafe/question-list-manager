@@ -4,8 +4,8 @@
 #include <json/json.h>
 
 #include "groq-sentence-fetcher.h"
-#include "../libs/my-json-helper.h"
-#include "../libs/color-printer.h"
+#include "my-json-helper.h"
+#include "color-printer.h"
 
 
 // GroqSentenceFetcher::GroqSentenceFetcher()

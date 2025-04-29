@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../model/vocabulary-retriever.h"
+#include "vocabulary-retriever.h"
 
 class VocabularyManager
 {

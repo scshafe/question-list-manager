@@ -2,12 +2,12 @@
 #include <exception>
 #include "vocabulary-manager.h"
 
-#include "../model/vocabulary-retriever.h"
-#include "../model/vocab-item.h"
+#include "vocabulary-retriever.h"
+#include "vocab-item.h"
 
-#include "../libs/sentence-fetcher.h"
-#include "../libs/my-json-helper.h"
-#include "../libs/color-printer.h"
+#include "sentence-fetcher.h"
+#include "my-json-helper.h"
+#include "color-printer.h"
 
 
 VocabularyManager* VocabularyManager::p_inst = nullptr;

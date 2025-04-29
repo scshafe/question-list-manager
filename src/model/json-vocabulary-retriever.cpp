@@ -9,8 +9,8 @@
 
 #include "vocabulary-retriever.h"
 #include "json-vocabulary-retriever.h"
-#include "../libs/my-json-helper.h"
-#include "../libs/color-printer.h"
+#include "my-json-helper.h"
+#include "color-printer.h"
 
 JsonVocabularyRetriever::JsonVocabularyRetriever()
 {

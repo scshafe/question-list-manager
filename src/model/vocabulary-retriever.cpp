@@ -2,7 +2,7 @@
 
 #include "vocabulary-retriever.h"
 #include "json-vocabulary-retriever.h"
-#include "../libs/color-printer.h"
+#include "color-printer.h"
 
 
 
