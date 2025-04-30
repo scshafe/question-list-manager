@@ -5,7 +5,7 @@ add_library(libs
             sentence-fetcher.cpp 
             groq-sentence-fetcher.cpp 
             my-json-helper.cpp 
-            color-printer.h)
+            color-printer.cpp)
 
 target_include_directories(libs 
                            PUBLIC 

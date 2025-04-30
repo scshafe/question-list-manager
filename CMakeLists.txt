@@ -4,6 +4,8 @@ include(CMakePrintHelpers)
 set(CMAKE_TOOLCHAIN_FILE "bbb-deb-11-hello.cmake")
 project(question-manager VERSION 1.0)
 
+add_definitions(-DDEBUG)
+#add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)

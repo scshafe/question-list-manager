@@ -3,18 +3,26 @@
 
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "color.hpp"
 #include <sstream>
 namespace ColorPrinter
 {
+    extern std::ostream os;
     
+
+    void initialize_logs(std::string& filename); 
+    void print(std::stringstream& ss, std::basic_ostream<char>& colour(std::basic_ostream<char>& stream));
+
+
     template <typename ... Args >
     void print_error(Args ... args)
     {
         std::stringstream ss;
         (ss << "Error: " << ... << args);
-        std::cout << termcolor::red << ss.str() << termcolor::reset << std::endl;
+        print(ss, termcolor::red);
+        os << termcolor::red << ss.str() << termcolor::reset << std::endl;
     }
 
     template <typename ... Args >
@@ -22,7 +30,8 @@ namespace ColorPrinter
     {
         std::stringstream ss;
         (ss << "Warning: " << ... << args);
-        std::cout << termcolor::bright_magenta << ss.str() << termcolor::reset << std::endl;
+        print(ss, termcolor::bright_magenta);
+        os << termcolor::bright_magenta << ss.str() << termcolor::reset << std::endl;
     }
 
     template <typename ... Args >
@@ -30,7 +39,8 @@ namespace ColorPrinter
     {
         std::stringstream ss;
         (ss << ... << args);
-        std::cout << termcolor::green << ss.str() << termcolor::reset << std::endl;
+        print(ss, termcolor::green);
+        os << termcolor::green << ss.str() << termcolor::reset << std::endl;
     }
 
     template <typename ... Args >
@@ -38,7 +48,8 @@ namespace ColorPrinter
     {
         std::stringstream ss;
         (ss << ... << args);
-        std::cout << ss.str() << std::endl;
+        os << ss.str() << std::endl;
+        print(ss, termcolor::blue);
     }
 
 

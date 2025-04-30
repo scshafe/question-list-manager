@@ -11,6 +11,8 @@ namespace po = boost::program_options;
 
 int main(int argc, char **argv)
 {
+  std::string logfile = "question-manager.logs";
+  CP::initialize_logs(logfile);
   CP::print_important("Using C++ standard: ", __cplusplus);
 
 // Command-line **only** options

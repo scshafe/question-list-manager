@@ -90,6 +90,7 @@ void TempWidget::update_current_temp()
 
 
   temp_current = stof(root["data"][0]["coordinates"][0]["dates"][0]["value"].asString());
+  CP::print_info("current temp: ", temp_current);
   std::cout << "current temp: " << temp_current << std::endl;
 
   char *markup = get_temp_markup_string(temp_current);
