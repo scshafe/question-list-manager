@@ -8,10 +8,9 @@
 
 
 #include "temp-widget.h"
-// #include "src/controller/time-helper.h"
-#include "../controller/time-helper.h"
-#include "../libs/my-json-helper.h"
-#include "../libs/color-printer.h"
+#include "time-helper.h"
+#include "my-json-helper.h"
+#include "color-printer.h"
 
 TempWidget::TempWidget()
 {
