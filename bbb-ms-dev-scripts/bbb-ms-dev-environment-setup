@@ -4,6 +4,7 @@ echo -e "\nSourcing bbb-ms-dev-environment-setup\n\n"
 
 # ------ Source all relevant paths ------
 if [[ -z "$BBB_DEV_ENV_ACTIVATED" ]]; then
+  echo -e "Sourcing bbb-ms-dev-scripts/setup.config"
   source "bbb-ms-dev-scripts/setup.config"
 fi
 
@@ -21,13 +22,17 @@ if [[ -z "$TMUX" && "$HOSTNAME" = $HOST_HOSTNAME ]]; then
   fi
     
 else
-  
+  echo -e "selecting terminal environment to source"
   if [[ "$HOSTNAME" = "$HOST_HOSTNAME" ]]; then
+    echo -e "Host detected"
     source $HOST_DIR/bbb-ms-dev-scripts/host/setup-host-env
   
   elif [ "$HOSTNAME" = "$VBOX_HOSTNAME" ]; then
+    echo -e "Vbox detected"
     source $VBOX_DIR/bbb-ms-dev-scripts/vbox/setup-vbox-env
-  elif [ "$HOSTNAME" = "BBB_HOSTNAME" ]; then
+
+  elif [ "$HOSTNAME" = "$BBB_HOSTNAME" ]; then
+    echo -e "BBB detected"
     source $BBB_DIR/bbb-ms-dev-scripts/bbb/setup-bbb-env
   fi
 fi

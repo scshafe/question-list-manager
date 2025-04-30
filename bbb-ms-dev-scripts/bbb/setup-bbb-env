@@ -1,11 +1,11 @@
-echo -e "\nSourcing setup-bbb-env\n\n"
+echo -e "Sourcing setup-bbb-env"
 
 alias brightness0='echo 0 | sudo tee /sys/class/backlight/backlight/brightness'
 alias brightness100='echo 100 | sudo tee /sys/class/backlight/backlight/brightness'
 alias brightness50='echo 50 | sudo tee /sys/class/backlight/backlight/brightness'
 
 alias run-question-manager="sudo $BBB_DIR/bbb-ms-dev-scripts/bbb/start_ms_application.sh"
-#alias run-question-manager="sudo xinit $BBB_DIR/EMBEDDED-GUI"
 
 echo -e "Running bbb/ms-dev-scripts/bbb/connect-to-internet"
-sudo "$BBB_DIR/$BBB_MS_DEV_SETUP"
+
+$BBB_DIR/bbb-ms-dev-scripts/bbb/connect-to-internet

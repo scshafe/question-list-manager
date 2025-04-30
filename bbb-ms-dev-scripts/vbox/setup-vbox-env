@@ -8,5 +8,5 @@ alias upload-new-embedded-executable="scp -P $BBB_PORT $VBOX_DIR/build/EMBEDDED-
 scp-scripting-dir
 
 echo -e "\nRunning bbb-ms-dev-scripts/vbox-connect-to-internet\n"
-sudo $VBOX_DIR/bbb-ms-dev-scripts/vbox/connect-to-internet
+$VBOX_DIR/bbb-ms-dev-scripts/vbox/connect-to-internet
 
