@@ -46,6 +46,7 @@ VocabItem VocabularyManager::get_next_vocab_item()
   {
     CP::print_error(e.what());
   }
+  CP::print_info("VocabularyManager sending word: ", vocab_item.word);
   return vocab_item;
 
 }

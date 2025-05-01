@@ -5,28 +5,47 @@
 #include "question-card.h"
 #include "../controller/vocabulary-manager.h"
 #include "../model/vocab-item.h"
+#include "color-printer.h"
 
 QuestionCard::QuestionCard() :
-Gtk::Bin(),
-button()
+Gtk::Box(),
+vocab_button(),
+next_button()
 {
-  VocabularyManager* vm = VocabularyManager::get_instance();
-  vocab_item = vm->get_next_vocab_item();
-
   select_text = 0;
-  button.set_label(get_text_item());
+  vm = VocabularyManager::get_instance();
+  
+  get_next_vocab_item();
+  CP::print_info("just got: ", vocab_item.word);
+  CP::print_info("select_text: ", select_text);
+  
+  std::string tmp = get_text_item();
+  CP::print_info("setting vocab button label: ", tmp);
+  vocab_button.set_label(tmp);
 
-  add(button);
-  button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_question_clicked));
+  next_button.set_label("next");
+
+  add(vocab_button);
+  vocab_button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_question_clicked));
+
+  add(next_button);
+  next_button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_next_clicked));
   show_all_children();
 
 }
 
 
+
 void QuestionCard::on_question_clicked()
 {
   increment_text_counter();
-  button.set_label(get_text_item());
+  vocab_button.set_label(get_text_item());
+}
+
+void QuestionCard::on_next_clicked()
+{
+  get_next_vocab_item();
+  vocab_button.set_label(get_text_item());
 }
 
 void QuestionCard::increment_text_counter()
@@ -36,17 +55,42 @@ void QuestionCard::increment_text_counter()
 
 std::string QuestionCard::get_text_item()
 {
+  std::string tmp;
   if (select_text == 0)
   {
-    return vocab_item.word;
+    tmp =  vocab_item.word;
   }
-  if (select_text == 1)
+  else if (select_text == 1)
   {
-    return vocab_item.definition;
+    tmp = vocab_item.definition;
   }
-  if (select_text == 2)
+  else if (select_text == 2)
   {
-    return vocab_item.example_sentence;
+    tmp =  vocab_item.example_sentence;
   }
-  return "Error in get_text_item()";
+  else
+  {
+    CP::print_error("get_text_item(), select_text: ", select_text);
+    tmp = "Error in get_text_item()";
+  }
+  CP::print_info("get_text_item() returning: ", tmp);
+  return tmp;
 }
+
+
+
+void QuestionCard::get_next_vocab_item()
+{
+  select_text = 0;
+  vocab_item = vm->get_next_vocab_item();
+  CP::print_info("Retrieved word: ", vocab_item.word);
+}
+
+//VocabItem QuestionCard::get_prev_vocab_item()
+//{
+//  select_text = 0;
+//  vocab_item = vm->get_prev_vocab_item();
+//}
+
+
+
