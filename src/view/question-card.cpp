@@ -22,13 +22,16 @@ next_button()
   std::string tmp = get_text_item();
   CP::print_info("setting vocab button label: ", tmp);
   vocab_button.set_label(tmp);
+  vocab_button.set_size_request(400, 200);
+  vocab_button.set_overflow(false);
+  //vocab_button.set_default_size(400, 200); 
 
   next_button.set_label("next");
 
-  add(vocab_button);
+  pack_start(vocab_button/*, Gtk::PACK_EXPAND_WIDGET*/);
   vocab_button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_question_clicked));
 
-  add(next_button);
+  pack_start(next_button, Gtk::PACK_SHRINK);
   next_button.signal_clicked().connect(sigc::mem_fun(*this, &QuestionCard::on_next_clicked));
   show_all_children();
 
